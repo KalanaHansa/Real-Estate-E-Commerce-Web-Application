@@ -13,12 +13,21 @@ if (!dbHost || !dbUser || !dbName) {
   );
 }
 
+// Detect if we're connecting to Azure MySQL (hostname contains .mysql.database.azure.com)
+const isAzureMySQL = dbHost?.includes('.mysql.database.azure.com') ?? false;
+
 const pool = mysql.createPool({
   host: dbHost || 'localhost',
   user: dbUser || 'root',
   password: dbPassword || '',
   database: dbName || 'real_estate_db',
   port: Number(process.env.DB_PORT) || 3306,
+  // Enable SSL for Azure MySQL
+  ...(isAzureMySQL && {
+    ssl: {
+      rejectUnauthorized: true,
+    },
+  }),
   waitForConnections: true,
   connectionLimit: 10,
   queueLimit: 0,

@@ -140,3 +140,21 @@ INSERT INTO cities (district_id, name, code) VALUES
 (4, 'Kandy City', 'KY01'),
 (5, 'Matale Town', 'MT01'),
 (6, 'Galle Fort', 'GL01');
+
+INSERT INTO users (
+    email, 
+    password_hash, 
+    full_name, 
+    auth_provider, 
+    role, 
+    is_active,
+    created_at
+) VALUES (
+    'kalanahansa74@gmail.com',
+    '$2b$12$HYrSnDFDY3Qt27UqYUzOEOpLbFcoMqdx7mzWZDrTqmsPWBJcZXwSy', 
+    'System Administrator',
+    'local',
+    'admin',
+    TRUE,
+    NOW()
+);
